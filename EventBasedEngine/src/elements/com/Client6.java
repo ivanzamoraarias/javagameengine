@@ -95,10 +95,10 @@ public class Client6 extends PApplet{
 	 //@SuppressWarnings("serial")
 	 public void driveKeyboard()
 	 {
-		 EventHandler ab= new EventHandler();
+		 /*EventHandler ab= new EventHandler();
 		 ab.RegisterEvent(c, currentTimeMillis(), EventTypesEnum.KEYBOARD_PRESS_RIGHT);
 		 ab.setPriority(1);
-		 eventList2.add(ab);
+		 eventList2.add(ab);*/
 		
 		 if(this.keyPressed)
 		 {
