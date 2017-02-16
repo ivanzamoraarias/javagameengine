@@ -192,9 +192,7 @@ public class Client5 extends PApplet{
 						System.out.println("No es una lista");
 						//return null;
 					}
-					//game=(GameObj)in.readObject();
-					//System.out.print("LLega "+game.toString());
-					
+				
 				} catch (Exception e) {
 					System.out.println("problemas al convertir");
 					System.out.println("ByteBuffer:  "+bb.toString());

@@ -389,10 +389,6 @@ public class Server5 {
 				//int count=1;
 				while(true)
 				{
-
-					//for(int i=0;i<3;i++)
-					//{
-					//Thread.sleep(100);
 					if(!QueueEvent.isEmpty())
 					{
 						System.out.println("Si esta llena la Queue");
