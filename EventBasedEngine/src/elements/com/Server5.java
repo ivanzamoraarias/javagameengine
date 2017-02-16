@@ -394,8 +394,9 @@ public class Server5 {
 						System.out.println("Si esta llena la Queue");
 						EventHandler ev= QueueEvent.peek();
 						//System.err.println("peek "+ev.ID);
-
-						GameObj obj= QueueEvent.take().doEvent(clientsMap.get(ev.IDobject));
+						GameObj o = clientsMap.get(ev.IDobject);
+						GameObj obj= QueueEvent.take().doEvent(o);
+						//GameObj obj= QueueEvent.take().doEvent(clientsMap.get(ev.IDobject));
 						if(obj.IDclient!=0)
 						{
 							System.err.println("Antes x "+clientsMap.get(obj.IDclient).position[0]
