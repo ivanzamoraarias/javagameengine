@@ -21,10 +21,6 @@ public class Client5 extends PApplet{
 
 	SocketChannel client;
 	
-	//Socket socket = new Socket();
-	//ObjectOutputStream out;
-	//ObjectInputStream in;
-	
 	TimeLine clientTimeline= new TimeLine();
 
 	GameObj c;
@@ -70,7 +66,8 @@ public class Client5 extends PApplet{
 		 clientTimeline.calculateTic();	
 		 clientTimeline.setFinishTime(currentTimeMillis());
 		 c.setLocalTimeline(clientTimeline);
-		 c.moveComponent.Timedelta= (float)clientTimeline.ticSize;
+		 //c.moveComponent.Timedelta= (float)clientTimeline.ticSize;
+		 c.moveComponent.Timedelta=20;
 		 background(24,20,100);
 		 fill(255,0,0);
 		 driveKeyboard();
