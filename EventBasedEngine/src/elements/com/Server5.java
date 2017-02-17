@@ -172,26 +172,38 @@ public class Server5 {
 
 							try {
 								in = new ObjectInputStream(bis);
-								Object ob= in.readObject();
+								
+								while(true)
+								{
+									
+									Object ob;
+									try{
+										ob = in.readObject();
+									} catch (IOException e)
+									{
+										break;
+									}
 
-								if(ob instanceof GameObj)
-								{
-									//update logica
-									GameObj gob=(GameObj)ob;
-									insertLogic(gob);
-								}
-								else if(ob instanceof EventHandler)
-								{
-									//agregar handlers
-									EventHandler a =(EventHandler)ob;
-									manager.addEventHandler(a);
-									System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
-								}
-								else
-								{
-									System.out.print("no se ...");
-								}
-								//game=(GameObj)in.readObject();
+									if(ob instanceof GameObj)
+									{
+										//update logica
+										GameObj gob=(GameObj)ob;
+										insertLogic(gob);
+									}
+									else if(ob instanceof EventHandler)
+									{
+										//agregar handlers
+										EventHandler a =(EventHandler)ob;
+										manager.addEventHandler(a);
+										System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
+									}
+									else
+									{
+										System.out.print("no se ...");
+									}
+
+								}//end while
+																//game=(GameObj)in.readObject();
 								//System.out.print("LLega "+game.toString());
 
 							} catch (Exception e) {
