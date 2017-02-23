@@ -13,8 +13,8 @@ import processing.core.PApplet;
  */
 public class GameObj implements Serializable {
 	
-	int ID;
-	int IDclient;
+	public int ID;
+	public int IDclient;
 	
 	//timeline
 	TimeLine localTimeLine;
@@ -27,16 +27,16 @@ public class GameObj implements Serializable {
 	public float[] position= new float[2];
 	//components
 	Color color;
-	Movable moveComponent;
-	Drawable drawableComponent;
-	Collidable collidableComponent;
+	public Movable moveComponent;
+	public Drawable drawableComponent;
+	public Collidable collidableComponent;
 	CollideAsDeadZone collidableasdeadzone;
 	
 	int ident=0;
 	
 	LinkedList<Component> componentList= new LinkedList<>();
 	
-	EventHandler objectEvent;
+	public EventHandler objectEvent;
 	
 	public GameObj(float worldW, float worldH, float x, float y,float widthn,float heightn) 
 	{
@@ -49,7 +49,7 @@ public class GameObj implements Serializable {
 		setCenter(x, y);
 	}
 	
-	GameObj(PApplet p, float x, float y,float widthn,float heightn)
+	public GameObj(PApplet p, float x, float y,float widthn,float heightn)
 	{
 		//p=p_;
 		ID= this.hashCode();

@@ -9,7 +9,7 @@ public class Collidable implements Component, Serializable{
 	LinkedList<GameObj> objectsToInteract;
 	
 	boolean []boundaries=new boolean [4];
-	boolean collidableBetweenObjects;
+	public boolean collidableBetweenObjects;
 	
 	//LinkedList<EventHandlerTest> objectEvent= new LinkedList<>();
 	

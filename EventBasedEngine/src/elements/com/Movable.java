@@ -17,7 +17,7 @@ public class Movable implements Component, Serializable {
 	
 	boolean leftMove;
 	boolean rightMove;
-	boolean jumping;
+	public boolean jumping;
 	boolean up;
 	
 	float jumpPoint;
@@ -25,7 +25,7 @@ public class Movable implements Component, Serializable {
 	
 	Float[]patterns= new Float[4];
 	
-	float Timedelta;
+	public float Timedelta;
 	float[] sendinf= new float[2];
 	
 	boolean stopsendingevents;

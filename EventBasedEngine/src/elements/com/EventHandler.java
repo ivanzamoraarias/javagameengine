@@ -12,7 +12,7 @@ public class EventHandler implements Comparable<EventHandler>, Serializable{
 	int age;
 	
 	int ID= this.hashCode();
-	int IDobject;
+	public int IDobject;
 	
 	Thread eventProcess;
 	serializableRunnable eventP;

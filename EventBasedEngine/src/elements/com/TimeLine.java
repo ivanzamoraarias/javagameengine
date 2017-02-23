@@ -7,7 +7,7 @@ public class TimeLine implements Serializable{
 	int Actualtime;
 	int StarTime;
 	int FinishTime;
-	int ticSize;
+	public int ticSize;
 	
 	boolean flag;
 	
@@ -15,7 +15,7 @@ public class TimeLine implements Serializable{
 	
 	TimeLine fatherTime;
 	
-	TimeLine()
+	public TimeLine()
 	{
 		factor=1;
 		fatherTime=null;
