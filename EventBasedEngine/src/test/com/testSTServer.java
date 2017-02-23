@@ -1,4 +1,4 @@
-package elements.com;
+package test.com;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,8 +21,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
+import elements.com.EventHandler;
+import elements.com.GameObj;
+import elements.com.Server5;
+import elements.com.TimeLine;
+import elements.com.Server5.EventManagerT;
 
-public class Server5 {
+public class testSTServer {
 
 	int loopnumber;
 	TimeLine GlobalServerTime;
@@ -47,11 +52,11 @@ public class Server5 {
 	//game world facts
 	float gameWorldHeigh;
 	float gameWorldWidth;
-
+	
 	public static void main(String[] args) throws Exception {
 		//port=2223;
 		//int eveport= 2224;
-		Server5 application= new Server5();
+		testSTServer application= new testSTServer();
 		application.setWolrdSize(800, 400);
 		application.gameWorldCreation();
 		application.runEventManager();
@@ -60,13 +65,12 @@ public class Server5 {
 		//application.checkForEventsInObjects();
 
 	}
-
-	Server5()
+	testSTServer()
 	{
 		IDServer= this.hashCode();
 		loopnumber=0;
 	}
-	Server5(int i, int j)
+	testSTServer(int i, int j)
 	{
 		runEventManager();
 		loopnumber=0;
@@ -179,7 +183,7 @@ public class Server5 {
 									Object ob;
 									try{
 										ob = in.readObject();
-									} catch (Exception e)
+									} catch (IOException e)
 									{
 										break;
 									}
@@ -381,15 +385,77 @@ public class Server5 {
 					manager.addEventHandler(clientsMap.get(key).extractEvent());
 			}
 
-			synchronized (monitor) {
-				monitor.wait();;
-			}
+			
 			//System.out.println("Size "+clientsMap.size());
 			out.writeObject(new LinkedList<GameObj>(clientsMap.values()));
 		}
 	}
 
 
+	public class WritePortProcess implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	public class ReadPortProcess implements Runnable {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+			
+		}
+		void selectorExchangeProcess() throws IOException
+		{
+			Selector selector = Selector.open();
+			System.out.println("Selector open: " + selector.isOpen());
+
+			// Get server socket channel and register with selector
+			ServerSocketChannel serverSocket = ServerSocketChannel.open();
+			InetSocketAddress hostAddress = new InetSocketAddress("localhost", port);
+			serverSocket.bind(hostAddress);
+			serverSocket.configureBlocking(false);
+			int ops = serverSocket.validOps();
+			SelectionKey selectKy = serverSocket.register(selector, ops, null);
+			for (;;) 
+			{
+				System.out.println("Waiting for select...");
+				int noOfKeys = selector.select();
+
+				System.out.println( "Number of selected keys: " + noOfKeys);
+
+				Set<SelectionKey> selectedKeys = selector.selectedKeys();
+				Iterator<SelectionKey> iter = selectedKeys.iterator();
+
+				while (iter.hasNext()) 
+				{
+					SelectionKey ky = iter.next();
+					System.out.println("Acc "+ky.isAcceptable()+"  Read "+ky.isReadable()+" Write "+ky.isWritable()
+							+" Valid "+ky.isValid()+" Conec "+ky.isConnectable());
+
+					/*if(ky.isReadable() && ky.isWritable())
+						continue;*/
+					if (ky.isAcceptable()) 
+					{
+						System.out.println("------ Accept");
+						// Accept the new client connection
+						SocketChannel client = serverSocket.accept();
+						client.configureBlocking(false);
+
+						// Add the new connection to the selector
+						client.register(selector, SelectionKey.OP_READ);
+
+						System.out.println("Accepted new connection from client: " + client);
+					}
+				}
+			}
+		}
+		
+	}
 	public class EventManagerT implements Runnable {
 
 		PriorityBlockingQueue<EventHandler>QueueEvent= new PriorityBlockingQueue<>();
@@ -443,5 +509,4 @@ public class Server5 {
 		}
 
 	}
-
 }
