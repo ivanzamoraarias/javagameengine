@@ -165,14 +165,15 @@ public class Server5 {
 						try{
 							SocketChannel client = (SocketChannel) ky.channel();
 							ByteBuffer buffer = ByteBuffer.allocate(1000000);
-							client.read(buffer);
-
+							//client.read(buffer);
+							
+							System.out.println("bbbb  "+client.read(buffer));
 							ByteArrayInputStream bis = new ByteArrayInputStream(buffer.array());
 							ObjectInputStream in = null;
 
 							try {
 								in = new ObjectInputStream(bis);
-								
+								System.out.print("Bites avayabe: "+in.available());
 								while(true)
 								{
 									
@@ -181,6 +182,7 @@ public class Server5 {
 										ob = in.readObject();
 									} catch (Exception e)
 									{
+										e.printStackTrace();
 										break;
 									}
 
