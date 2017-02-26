@@ -53,7 +53,7 @@ public class Server6 {
 	public static void main(String[] args) throws Exception {
 		//port=2223;
 		//int eveport= 2224;
-		Server5 application= new Server5();
+		Server6 application= new Server6();
 		application.setWolrdSize(800, 400);
 		application.gameWorldCreation();
 		application.runEventManager();
@@ -189,9 +189,23 @@ public class Server6 {
 									}
 									if(ob instanceof LinkedList)
 									{
-										System.out.print("-----+++++---");
+										System.out.println("-----+++++---");
 										LinkedList<Serializable>receivedList= (LinkedList<Serializable>)ob;
-										System.out.print("-----+++++---");
+										for(Object o:receivedList)
+										{
+											if(o instanceof GameObj)
+											{
+												GameObj gob=(GameObj)o;
+												insertLogic(gob);
+											}
+											else if(o instanceof EventHandler)
+											{
+												EventHandler a =(EventHandler)o;
+												manager.addEventHandler(a);
+												System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
+											}
+										}
+										System.out.println("-----+++++---");
 										
 									}
 									else if(ob instanceof GameObj)
