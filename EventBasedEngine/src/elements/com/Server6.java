@@ -449,7 +449,7 @@ public class Server6 {
 
 					}
 					synchronized (monitor) {
-						monitor.notify();
+						monitor.wait();
 					}
 					//}
 					//count ++;	
@@ -464,6 +464,9 @@ public class Server6 {
 		{
 			QueueEvent.put(e);
 			//System.err.println("Se aggrego "+e.ID);
+			synchronized (monitor) {
+				monitor.notify();
+			}
 		}
 
 	}
