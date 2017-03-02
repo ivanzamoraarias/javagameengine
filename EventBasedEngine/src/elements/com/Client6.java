@@ -104,7 +104,11 @@ public class Client6 extends PApplet{
 			}
 		}
 	}
-	//@SuppressWarnings("serial")
+	
+	public void stop()
+	{
+		System.out.println("Se cierra");
+	}
 	public void driveKeyboard()
 	{
 		/*EventHandler ab= new EventHandler();
