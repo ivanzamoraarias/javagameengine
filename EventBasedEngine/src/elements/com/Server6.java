@@ -204,9 +204,23 @@ public class Server6 {
 												manager.addEventHandler(a);
 												System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
 											}
+											else if(o instanceof String)
+											{
+												System.out.print("holaaaaaaaa");
+												ky.cancel();
+											}
 										}
 										System.out.println("-----+++++---");
 										
+									}
+									else if(ob instanceof String)
+									{
+										String s = (String)ob;
+										if(s.equals("quit"))
+										{
+											ky.cancel();
+											System.out.print("Se desconecto del canal :v");
+										}
 									}
 									else if(ob instanceof GameObj)
 									{

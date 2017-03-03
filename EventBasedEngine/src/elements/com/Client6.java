@@ -89,7 +89,7 @@ public class Client6 extends PApplet{
 			//exchangeDataWithServer();
 			selectorExchangeDataWithServer();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		if(!retrieveList.isEmpty())
@@ -107,7 +107,16 @@ public class Client6 extends PApplet{
 	
 	public void stop()
 	{
-		System.out.println("Se cierra");
+		String s= "quit";
+		LinkedList<Serializable>serializableObjectsList= new LinkedList<>();
+		serializableObjectsList.add(s);
+		try {
+			sendListOfSerializableObjects(serializableObjectsList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("----------------Se cierra--------------++++++++++++++*********");
 	}
 	public void driveKeyboard()
 	{
@@ -172,6 +181,8 @@ public class Client6 extends PApplet{
 		// read from server
 		retrieveList.clear();
 		retrieveList.addAll(readList());
+		
+		//sendObjects("quit");
 
 
 	}
@@ -231,7 +242,13 @@ public class Client6 extends PApplet{
 	}
 	private void sendListOfSerializableObjects(LinkedList<Serializable>list) throws IOException
 	{
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		out.writeObject(list);
+		out.flush();
+		youtBytes= bos.toByteArray();
+		buffer = ByteBuffer.wrap(youtBytes);
+		client.write(buffer);
+		
+		/*ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutput out = null;
 		byte[] youtBytes= null;
 
@@ -240,7 +257,7 @@ public class Client6 extends PApplet{
 		out.flush();
 		youtBytes= bos.toByteArray();
 		ByteBuffer buffer = ByteBuffer.wrap(youtBytes);
-		client.write(buffer);
+		client.write(buffer);*/
 	}
 
 	private void initializeOutputVariables() throws IOException
