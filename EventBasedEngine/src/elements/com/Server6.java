@@ -41,9 +41,8 @@ public class Server6 {
 
 	int IDServer;
 	int port=2223;
-	int portEvents;
+	
 	ServerSocket socketConnection;
-	ServerSocket socketEvents;
 
 
 	//game world facts
@@ -68,23 +67,7 @@ public class Server6 {
 		IDServer= this.hashCode();
 		loopnumber=0;
 	}
-	Server6(int i, int j)
-	{
-		runEventManager();
-		loopnumber=0;
-		port=i;
-		portEvents=j;
-		IDServer= this.hashCode();
-
-		try {
-			socketConnection = new ServerSocket(port);
-			socketEvents = new  ServerSocket(portEvents);
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	public void runEventManager()
 	{
 		try{
@@ -127,9 +110,12 @@ public class Server6 {
 		serverSocket.configureBlocking(false);
 		int ops = serverSocket.validOps();
 		SelectionKey selectKy = serverSocket.register(selector, ops, null);
+		
 
 		for (;;) 
 		{
+			long startTime = System.currentTimeMillis();
+			
 			System.out.println("Waiting for select...");
 			int noOfKeys = selector.select();
 
@@ -148,6 +134,7 @@ public class Server6 {
 					continue;*/
 				if (ky.isAcceptable()) 
 				{
+					long startTimea = System.currentTimeMillis();
 					System.out.println("------ Accept");
 					// Accept the new client connection
 					SocketChannel client = serverSocket.accept();
@@ -156,20 +143,24 @@ public class Server6 {
 					// Add the new connection to the selector
 					client.register(selector, SelectionKey.OP_READ|SelectionKey.OP_WRITE);
 
-					System.out.println("Accepted new connection from client: " + client);
+					//System.out.println("Accepted new connection from client: " + client);
+					long stopTimea = System.currentTimeMillis();
+				    long elapsedTimea = stopTimea - startTime;
+				    System.out.println("-*-*-*-*-*-*-* Time Acc "+elapsedTimea);
 				}
 				else 
 				{
 					if (ky.isReadable()) 
 					{
-						System.out.println("---- Readable");
+						long startTimea = System.currentTimeMillis();
+						//System.out.println("---- Readable");
 
 						try{
 							SocketChannel client = (SocketChannel) ky.channel();
 							ByteBuffer buffer = ByteBuffer.allocate(1000000);
-							//client.read(buffer);
+							client.read(buffer);
 							
-							System.out.println("bbbb  "+client.read(buffer));
+							//System.out.println("bbbb  "+client.read(buffer));
 							ByteArrayInputStream bis = new ByteArrayInputStream(buffer.array());
 							ObjectInputStream in = null;
 
@@ -189,7 +180,7 @@ public class Server6 {
 									}
 									if(ob instanceof LinkedList)
 									{
-										System.out.println("-----+++++---");
+										//System.out.println("-----+++++---");
 										LinkedList<Serializable>receivedList= (LinkedList<Serializable>)ob;
 										for(Object o:receivedList)
 										{
@@ -202,15 +193,15 @@ public class Server6 {
 											{
 												EventHandler a =(EventHandler)o;
 												manager.addEventHandler(a);
-												System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
+												//System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
 											}
 											else if(o instanceof String)
 											{
-												System.out.print("holaaaaaaaa");
+												//System.out.print("Se cierra el thread ");
 												ky.cancel();
 											}
 										}
-										System.out.println("-----+++++---");
+										//System.out.println("-----+++++---");
 										
 									}
 									else if(ob instanceof String)
@@ -233,7 +224,7 @@ public class Server6 {
 										//agregar handlers
 										EventHandler a =(EventHandler)ob;
 										manager.addEventHandler(a);
-										System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
+										//System.err.println("Se tiene " + manager.QueueEvent.size() +" evento "+a.toString());
 									}
 									else
 									{
@@ -264,10 +255,14 @@ public class Server6 {
 						{ 
 							System.out.println( ie2 ); 
 						}
+						long stopTimea = System.currentTimeMillis();
+					    long elapsedTimea = stopTimea - startTimea;
+					    System.out.println("-*-*-*-*-*-*-* Time Read "+elapsedTimea);
 					}
 					if(ky.isWritable())
 					{
-						System.out.println("---- Writable");
+						long startTimeb = System.currentTimeMillis();
+						//System.out.println("---- Writable");
 
 						ByteArrayOutputStream bos = new ByteArrayOutputStream();
 						ObjectOutput out = null;
@@ -295,11 +290,18 @@ public class Server6 {
 								e.printStackTrace();
 							}
 						}
+						long stopTimeb = System.currentTimeMillis();
+					    long elapsedTimeb = stopTimeb - startTimeb;
+					    System.out.println("-*-*-*-*-*-*-* Time Write "+elapsedTimeb);
 					}
 				}
 				iter.remove();
 			}
 			checkForEventsInObjects();
+			long stopTime = System.currentTimeMillis();
+		    long elapsedTime = stopTime - startTime;
+		    System.out.println("-**-*-*-*-*-*-*-*-**-*-*-*-*--**-*-*-*-*-*-*-*-**-*-*-*\n"+
+		    					"elapsetime Selector "+elapsedTime);
 		}
 	}
 	public void insertLogic(GameObj Gameclient)
@@ -449,13 +451,13 @@ public class Server6 {
 						//GameObj obj= QueueEvent.take().doEvent(clientsMap.get(ev.IDobject));
 						if(obj.IDclient!=0)
 						{
-							System.err.println("Antes x "+clientsMap.get(obj.IDclient).position[0]
-									+" y "+clientsMap.get(obj.IDclient).position[1]);
+							//System.err.println("Antes x "+clientsMap.get(obj.IDclient).position[0]
+								//	+" y "+clientsMap.get(obj.IDclient).position[1]);
 							//clientsMap.get(obj.IDclient);
 							clientsMap.replace(obj.IDclient, obj);
 							//
-							System.err.println("Despues x "+clientsMap.get(obj.IDclient).position[0]
-									+" y "+clientsMap.get(obj.IDclient).position[1]);
+							//System.err.println("Despues x "+clientsMap.get(obj.IDclient).position[0]
+								//	+" y "+clientsMap.get(obj.IDclient).position[1]);
 						}
 						else 
 							clientsMap.replace(obj.ID, obj);

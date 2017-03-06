@@ -41,7 +41,7 @@ public class Client6 extends PApplet{
 	public void setup() 
 	{
 		this.size(800, 400);
-		this.frameRate(30);
+		this.frameRate(60);
 
 		//initiate output variables
 		try {
@@ -84,14 +84,20 @@ public class Client6 extends PApplet{
 		driveKeyboard();
 
 		System.out.println("2 tamano de eventlist "+eventList2.size());
+		
+		
 		//exchange objects and events with the server
+		long startTime1 = System.currentTimeMillis();
 		try {
 			//exchangeDataWithServer();
 			selectorExchangeDataWithServer();
 		} catch (Exception e) {
 			//e.printStackTrace();
 		}
-
+		long stopTime1 = System.currentTimeMillis();
+		long elapsedTime = stopTime1 - startTime1;
+		
+		long startTime2 = System.currentTimeMillis();
 		if(!retrieveList.isEmpty())
 		{
 			for(GameObj a: retrieveList)
@@ -103,6 +109,13 @@ public class Client6 extends PApplet{
 
 			}
 		}
+		long stopTime2 = System.currentTimeMillis();
+		long elapsedTime2 = stopTime2 - startTime2;
+		
+		System.out.println("-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-\n"+
+				"Delta del gloop "+clientTimeline.ticSize+
+				"\nTime selectorMethod"+ elapsedTime +
+				"\nTime checkandupdate"+ elapsedTime2 );
 	}
 	
 	public void stop()
@@ -242,13 +255,13 @@ public class Client6 extends PApplet{
 	}
 	private void sendListOfSerializableObjects(LinkedList<Serializable>list) throws IOException
 	{
-		out.writeObject(list);
+		/*out.writeObject(list);
 		out.flush();
 		youtBytes= bos.toByteArray();
 		buffer = ByteBuffer.wrap(youtBytes);
 		client.write(buffer);
-		
-		/*ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		*/
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutput out = null;
 		byte[] youtBytes= null;
 
@@ -257,7 +270,7 @@ public class Client6 extends PApplet{
 		out.flush();
 		youtBytes= bos.toByteArray();
 		ByteBuffer buffer = ByteBuffer.wrap(youtBytes);
-		client.write(buffer);*/
+		client.write(buffer);
 	}
 
 	private void initializeOutputVariables() throws IOException
@@ -269,13 +282,13 @@ public class Client6 extends PApplet{
 	}
 	private void sendObjects(Object obj) throws IOException
 	{
-		out.writeObject(obj);
+		/*out.writeObject(obj);
 		out.flush();
 		youtBytes= bos.toByteArray();
 		buffer = ByteBuffer.wrap(youtBytes);
 		client.write(buffer);
-		
-		/*ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		*/
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ObjectOutput out = null;
 		byte[] youtBytes= null;
 
@@ -284,7 +297,7 @@ public class Client6 extends PApplet{
 		out.flush();
 		youtBytes= bos.toByteArray();
 		ByteBuffer buffer = ByteBuffer.wrap(youtBytes);
-		client.write(buffer);*/
+		client.write(buffer);
 	}
 
 
