@@ -112,8 +112,8 @@ public class Aserver7 {
 					client.configureBlocking(false);
 
 					// Add the new connection to the selector
-					client.register(selector, SelectionKey.OP_READ|SelectionKey.OP_WRITE);
-
+					//client.register(selector, SelectionKey.OP_READ|SelectionKey.OP_WRITE);
+					client.register(selector, SelectionKey.OP_READ);
 					//System.out.println("Accepted new connection from client: " + client);
 					long stopTimea = System.currentTimeMillis();
 				    long elapsedTimea = stopTimea - startTime;
@@ -129,7 +129,8 @@ public class Aserver7 {
 						try{
 							SocketChannel client = (SocketChannel) ky.channel();
 							//ByteBuffer buffer = ByteBuffer.allocate(1000000);
-							client.read(buffer);
+							//client.read(buffer);
+							long bytesRead=client.read(buffer);
 							buffer.clear();
 							//System.out.println("bbbb  "+client.read(buffer));
 							ByteArrayInputStream bis = new ByteArrayInputStream(buffer.array());
@@ -181,7 +182,7 @@ public class Aserver7 {
 										if(s.equals("quit"))
 										{
 											ky.cancel();
-											System.out.print("Se desconecto del canal :v");
+											System.out.println("Se desconecto del canal :v");
 										}
 									}
 									else if(ob instanceof GameObj)
@@ -202,9 +203,6 @@ public class Aserver7 {
 										System.out.print("no se ...");
 									}
 
-								//}//end while
-																//game=(GameObj)in.readObject();
-								//System.out.print("LLega "+game.toString());
 
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
@@ -212,6 +210,7 @@ public class Aserver7 {
 							}
 							finally
 							{
+								ky.interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 								try {
 									if(in != null)
 										in.close();
@@ -226,7 +225,7 @@ public class Aserver7 {
 						{ 
 							System.out.println( ie2 ); 
 						}
-						//buffer.clear();
+			
 						long stopTimea = System.currentTimeMillis();
 					    long elapsedTimea = stopTimea - startTimea;
 					    System.out.println("-*-*-*-*-*-*-* Time Read "+elapsedTimea);
@@ -254,7 +253,7 @@ public class Aserver7 {
 						}
 						finally
 						{
-							
+							ky.interestOps(SelectionKey.OP_READ);
 							try {
 								bos.close();
 							} catch (IOException e) {
