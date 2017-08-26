@@ -117,7 +117,7 @@ public class Xclient7 extends PApplet{
 	}
 	private void conectToServer() throws IOException
 	{	
-		InetSocketAddress hostAddress = new InetSocketAddress("fizamoraarias.com", port);
+		InetSocketAddress hostAddress = new InetSocketAddress("192.168.1.5", port);
 		client = SocketChannel.open(hostAddress);
 		System.out.println("Conectado");
 	}

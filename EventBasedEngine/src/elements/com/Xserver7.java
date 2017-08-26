@@ -1,23 +1,36 @@
 package elements.com;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.lang.management.ManagementFactory;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.PriorityBlockingQueue;
+
+import javax.management.Attribute;
+import javax.management.AttributeList;
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+
+import elements.com.Aserver8.GetCPUload;
+import elements.com.Aserver8.GetHeapMemoryUsed;
 
 
 public class Xserver7 {
@@ -31,6 +44,10 @@ public class Xserver7 {
 	
 	public static void main(String[] args) throws Exception {
 		
+		Thread t = new Thread(new GetCPUload());
+		t.start();
+		Thread t2= new Thread(new GetHeapMemoryUsed());
+		t2.start();
 		Xserver7 application= new Xserver7();
 		application.setWolrdSize(800, 400);
 		application.gameWorldCreation();
@@ -75,7 +92,7 @@ public class Xserver7 {
 
 		// Get server socket channel and register with selector
 		ServerSocketChannel serverSocket = ServerSocketChannel.open();
-		InetSocketAddress hostAddress = new InetSocketAddress("fizamoraarias.com", port);
+		InetSocketAddress hostAddress = new InetSocketAddress(port);
 		serverSocket.bind(hostAddress);
 		serverSocket.configureBlocking(false);
 		int ops = serverSocket.validOps();
@@ -351,5 +368,119 @@ public class Xserver7 {
 			}
 		}
 
+	}
+	public static class GetCPUload implements Runnable
+	{
+		
+		public GetCPUload() {
+			
+		   
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+			while(true)
+			{
+				String s=LocalDateTime.now().getHour()+":"+LocalDateTime.now().getMinute()+":"+
+									LocalDateTime.now().getSecond()+":"+LocalDateTime.now().getNano();
+				
+				String sm= System.currentTimeMillis()+"";
+				 //System.out.println(LocalDateTime.now().getHour());       // 7
+				   // System.out.println(LocalDateTime.now().getMinute());     // 45
+				    //System.out.println(LocalDateTime.now().getSecond());     // 32
+				   // System.out.println(LocalDateTime.now().getNano());
+
+				try(FileWriter fw = new FileWriter("/Users/ivanzamora/Desktop/serverCPUlocal.txt", true);
+					    BufferedWriter bw = new BufferedWriter(fw);
+					    PrintWriter out = new PrintWriter(bw))
+					{
+						
+					    out.println(s+" , "+sm+" , "+ getProcessCpuLoad());
+					    //more code
+					    
+					} catch (Exception e) {
+					    //exception handling left as an exercise for the reader
+						System.out.println("No funciona");
+					}
+				
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+			}
+		}
+		
+		public double getProcessCpuLoad() throws Exception {
+
+		    MBeanServer mbs    = ManagementFactory.getPlatformMBeanServer();
+		    ObjectName name    = ObjectName.getInstance("java.lang:type=OperatingSystem");
+		    AttributeList list = mbs.getAttributes(name, new String[]{ "ProcessCpuLoad" });
+
+		    if (list.isEmpty())     return Double.NaN;
+
+		    Attribute att = (Attribute)list.get(0);
+		    Double value  = (Double)att.getValue();
+
+		    // usually takes a couple of seconds before we get real values
+		    if (value == -1.0)      return Double.NaN;
+		    // returns a percentage value with 1 decimal point precision
+		    return ((int)(value * 1000) / 10.0);
+		}
+		
+	}
+	public static class GetHeapMemoryUsed implements Runnable
+	{
+		public GetHeapMemoryUsed() {
+			// TODO Auto-generated constructor stub
+			
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			
+			while(true)
+			{
+				String s=LocalDateTime.now().getHour()+":"+LocalDateTime.now().getMinute()+":"+
+									LocalDateTime.now().getSecond()+":"+LocalDateTime.now().getNano();
+				
+				String sm= System.currentTimeMillis()+"";
+				 //System.out.println(LocalDateTime.now().getHour());       // 7
+				   // System.out.println(LocalDateTime.now().getMinute());     // 45
+				    //System.out.println(LocalDateTime.now().getSecond());     // 32
+				   // System.out.println(LocalDateTime.now().getNano());
+
+				try(FileWriter fw = new FileWriter("/Users/ivanzamora/Desktop/serverMemorylocal.txt", true);
+					    BufferedWriter bw = new BufferedWriter(fw);
+					    PrintWriter out = new PrintWriter(bw))
+					{
+						
+					    out.println(s+" , "+sm+" , "+ getMemory());
+					    //more code
+					    
+					} catch (Exception e) {
+					    //exception handling left as an exercise for the reader
+						System.out.println("No funciona");
+					}
+				
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+			}
+		}
+		
+		public double getMemory() throws Exception {
+
+			double value=Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+		    return value;
+		}
+		
 	}
 }
