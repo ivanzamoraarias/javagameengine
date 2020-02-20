@@ -1,7 +1,7 @@
 package com.server;
 
 public class Server {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         System.out.println("HELLO SERVER");
 
         String s = "                 .\"-,.__\n" +
@@ -45,5 +45,5 @@ public class Server {
                 "                 / ,\"'\"\\,'               `/  `-.|\" ZetEngine Server Running now !!!";
 
         System.out.println(s);
-    }
+    }*/
 }

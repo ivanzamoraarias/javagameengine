@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "org.gretty" version "2.2.0"
 }
 
 group 'ZetEngine'
@@ -7,10 +8,19 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+
+gretty {
+    servletContainer = 'tomcat8'
+    contextPath = '/'
+}
+
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile 'javax.websocket:javax.websocket-api:1.1'
 }
