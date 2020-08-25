@@ -6,7 +6,9 @@ import com.enums.ComponentType;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-public class GameObject implements Entity {
+public class GameObject implements Entity, Comparable<GameObject> {
+    public String id;
+    public boolean isEnabled;
     private Hashtable<String, Component> componentsMap;
 
     public GameObject() {
@@ -33,5 +35,10 @@ public class GameObject implements Entity {
     @Override
     public Component getComponent(Component cls) {
         return null;
+    }
+
+    @Override
+    public int compareTo(GameObject o) {
+        return 0;
     }
 }
