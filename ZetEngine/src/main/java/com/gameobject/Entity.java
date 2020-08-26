@@ -9,7 +9,7 @@ public interface Entity {
     void update();
     void addComponent(Component c);
     HashMap<ComponentType, Component> getComponentsMap();
-    Component getComponent(Component cls);
+    Component getComponent(Class<? extends Component> cls);
 
 
 }

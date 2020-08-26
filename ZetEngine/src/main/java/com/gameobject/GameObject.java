@@ -33,7 +33,7 @@ public class GameObject implements Entity, Comparable<GameObject> {
     }
 
     @Override
-    public Component getComponent(Component cls) {
+    public Component getComponent(Class<? extends Component> cls) {
         return null;
     }
 

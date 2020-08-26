@@ -1,11 +1,8 @@
 package com.server;
 
-import com.component.Component;
 import com.datastructures.GoPool;
 import com.gameobject.GameObject;
-import com.sun.org.apache.xml.internal.utils.ObjectPool;
-
-import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,12 +34,21 @@ public class Engine {
 
     }
 
+    public GameObject getGameObjectById(String id) {
+        Optional<GameObject> answer = gameObjects.pool.stream().filter(item ->item.id== id).findFirst();
+        if (!answer.isPresent())
+            return null;
+
+        return answer.get();
+    }
+
     private void runGameLoop(){
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Update();
+                //System.out.println("=====================================FUNCIONAAAAAA");
             }
         }, 0, 16);
     }

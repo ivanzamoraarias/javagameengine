@@ -1,6 +1,7 @@
 package com.component;
 
 import java.time.temporal.Temporal;
+import java.util.Map;
 
 public class TimeBoundedComponent implements Component {
 
@@ -16,6 +17,11 @@ public class TimeBoundedComponent implements Component {
     public void update() {
 
 
+
+    }
+
+    @Override
+    public void setUpdateMap(Map map) {
 
     }
 }
