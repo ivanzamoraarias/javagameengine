@@ -91,3 +91,201 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 # End of https://www.gitignore.io/api/intellij
+
+
+###################################################################
+################################################################
+##################################################################
+
+
+# Created by https://www.gitignore.io/api/intellij
+# Edit at https://www.gitignore.io/?templates=intellij
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+ZetEngine/.idea/**/workspace.xml
+ZetEngine/.idea/**/tasks.xml
+ZetEngine/.idea/**/usage.statistics.xml
+ZetEngine/.idea/**/dictionaries
+ZetEngine/.idea/**/shelf
+
+# Generated files
+ZetEngine/.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+ZetEngine/.idea/**/dataSources/
+ZetEngine/.idea/**/dataSources.ids
+ZetEngine/.idea/**/dataSources.local.xml
+ZetEngine/.idea/**/sqlDataSources.xml
+ZetEngine/.idea/**/dynamic.xml
+ZetEngine/.idea/**/uiDesigner.xml
+ZetEngine/.idea/**/dbnavigator.xml
+
+# Gradle
+ZetEngine/.idea/**/gradle.xml
+ZetEngine/.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+ZetEngine/cmake-build-*/
+
+# Mongo Explorer plugin
+ZetEngine/.idea/**/mongoSettings.xml
+
+# File-based project format
+ZetEngine/*.iws
+
+# IntelliJ
+ZetEngine/out/
+
+# mpeltonen/sbt-idea plugin
+ZetEngine/.idea_modules/
+
+# JIRA plugin
+ZetEngine/atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+ZetEngine/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+ZetEngine/com_crashlytics_export_strings.xml
+ZetEngine/crashlytics.properties
+ZetEngine/crashlytics-build.properties
+ZetEngine/fabric.properties
+
+# Editor-based Rest Client
+ZetEngine/.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+ZetEngine/.idea/caches/build_file_checksums.ser
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+ZetEngine/.idea/**/sonarlint/
+
+# SonarQube Plugin
+ZetEngine/.idea/**/sonarIssues.xml
+
+# Markdown Navigator plugin
+ZetEngine/.idea/**/markdown-navigator.xml
+ZetEngine/.idea/**/markdown-navigator/
+
+# End of https://www.gitignore.io/api/intellij
+
+
+
+##############################################################
+##########################################################
+##############################################################
+
+# Created by https://www.gitignore.io/api/intellij
+# Edit at https://www.gitignore.io/?templates=intellij
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+zapdosjs/.idea/**/workspace.xml
+zapdosjs/.idea/**/tasks.xml
+zapdosjs/.idea/**/usage.statistics.xml
+zapdosjs/.idea/**/dictionaries
+zapdosjs/.idea/**/shelf
+
+# Generated files
+zapdosjs/.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+zapdosjs/.idea/**/dataSources/
+zapdosjs/.idea/**/dataSources.ids
+zapdosjs/.idea/**/dataSources.local.xml
+zapdosjs/.idea/**/sqlDataSources.xml
+zapdosjs/.idea/**/dynamic.xml
+zapdosjs/.idea/**/uiDesigner.xml
+zapdosjs/.idea/**/dbnavigator.xml
+
+# Gradle
+zapdosjs/.idea/**/gradle.xml
+zapdosjs/.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+zapdosjs/cmake-build-*/
+
+# Mongo Explorer plugin
+zapdosjs/.idea/**/mongoSettings.xml
+
+# File-based project format
+zapdosjs/*.iws
+
+# IntelliJ
+zapdosjs/out/
+
+# mpeltonen/sbt-idea plugin
+zapdosjs/.idea_modules/
+
+# JIRA plugin
+zapdosjs/atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+zapdosjs/.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+zapdosjs/com_crashlytics_export_strings.xml
+zapdosjs/crashlytics.properties
+zapdosjs/crashlytics-build.properties
+zapdosjs/fabric.properties
+
+# Editor-based Rest Client
+zapdosjs/.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+zapdosjs/.idea/caches/build_file_checksums.ser
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+zapdosjs/.idea/**/sonarlint/
+
+# SonarQube Plugin
+zapdosjs/.idea/**/sonarIssues.xml
+
+# Markdown Navigator plugin
+zapdosjs/.idea/**/markdown-navigator.xml
+zapdosjs/.idea/**/markdown-navigator/
+
+# End of https://www.gitignore.io/api/intellij
